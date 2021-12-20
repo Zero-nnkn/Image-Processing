@@ -14,5 +14,5 @@
 - Flip an image vertically/horizontally.
 
 ## Part 3: Blur and Edge Detection
-- Blur: Average, Median, Gaussian filter
-- Edge Detection: Sobel, Prewitt, Laplace
+- Blur: Average, Median, Gaussian filter.
+- Edge Detection: Sobel, Prewitt, Laplace.
