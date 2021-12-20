@@ -12,3 +12,7 @@
 - Rotate an image around its center, and crop the result image such that the result sizeis unchanged.
 - Rotate an image around its center, keep the whole image, and fill the missing area withblack color.
 - Flip an image vertically/horizontally.
+
+## Part 3: Blur and Edge Detection
+- Blur: Average, Median, Gaussian filter
+- Edge Detection: Sobel, Prewitt, Laplace
