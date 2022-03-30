@@ -23,7 +23,7 @@ public:
 	0: nếu tính thành công
 	1: nếu tính thất bại (không đọc được ảnh input,...)
 	*/
-	int DoConvolution(const Mat& sourceImage, Mat& destinationImage);
+	int DoConvolution(const Mat& sourceImage, Mat& destinationImage, bool isAbsolute = false);
 	Convolution();
 	~Convolution();
 };

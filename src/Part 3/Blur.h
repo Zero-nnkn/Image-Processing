@@ -1,13 +1,18 @@
 ﻿#pragma once
 #include "Convolution.h"
 
+
 class Blur
 {
 private:
-	int AverageOpt(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight);
-	int MedianOpt(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight);
-	int GaussianOpt(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight);
+	static int AverageOpt(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight);
+	static int MedianOpt(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight);
+	static int GaussianOpt(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight);
 public:
+	static const int AVERAGE_FLAG = 0;
+	static const int MEDIAN_FLAG = 1;
+	static const int GAUSSIAN_FLAG = 2;
+
 	/*
 	Hàm làm trơn ảnh xám
 	sourceImage: ảnh input
@@ -21,7 +26,8 @@ public:
 	0: nếu detect thành công
 	1: nếu detect thất bại (không đọc được ảnh input,...)
 	*/
-	int BlurImage(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight, int method);
+
+	static int BlurImage(const Mat& sourceImage, Mat& destinationImage, int kWidth, int kHeight, int method);
 	Blur();
 	~Blur();
 };

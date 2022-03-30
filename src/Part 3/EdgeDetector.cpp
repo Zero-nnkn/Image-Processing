@@ -7,26 +7,26 @@ EdgeDetector::EdgeDetector(){}
 EdgeDetector::~EdgeDetector(){}
 
 int EdgeDetector::DetectEdge(const Mat& sourceImage, Mat& destinationImage, int method) {
-	if (sourceImage.empty() || sourceImage.channels() != 1)
+	if (sourceImage.empty() || sourceImage.type() != CV_8UC1)
 		return 1;
 
 	switch (method)
 	{
-	case 0:
+	case EdgeDetector::SOBEL_FLAG:
 	{
-		if (this->SobelOpt(sourceImage, destinationImage) == 1)
+		if (EdgeDetector::SobelOpt(sourceImage, destinationImage) == 1)
 			return 1;
 		break;
 	}
-	case 1:
+	case EdgeDetector::PREWITT_FLAG:
 	{
-		if (this->PrewittOpt(sourceImage, destinationImage) == 1)
+		if (EdgeDetector::PrewittOpt(sourceImage, destinationImage) == 1)
 			return 1;
 		break;
 	}
-	case 2:
+	case EdgeDetector::LAPLACE_FLAG:
 	{
-		if (this->LaplaceOpt(sourceImage, destinationImage) == 1)
+		if (EdgeDetector::LaplaceOpt(sourceImage, destinationImage) == 1)
 			return 1;
 		break;
 	}

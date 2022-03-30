@@ -4,12 +4,13 @@
 #include <iostream>
 #include "Blur.h"
 #include "EdgeDetector.h"
+#include "Canny.h"
 
 int main(int argc, const char** argv)
 {
+    /*
     // Read input image
     Blur blur;
-    EdgeDetector edgeDetector;
     Mat desImg;
 
     if (argc < 4 || argc > 6) {
@@ -25,7 +26,7 @@ int main(int argc, const char** argv)
         int kx, ky;
         s1 >> kx; s2 >> ky;
 
-        if (blur.BlurImage(srcImg, desImg, kx, ky, 0) == 1) {
+        if (Blur::BlurImage(srcImg, desImg, kx, ky, Blur::AVERAGE_FLAG) == 1) {
             cerr << "Error!!! Failed to blur this image using average filtering" << endl;
             return 1;
         }
@@ -41,7 +42,7 @@ int main(int argc, const char** argv)
         int kx, ky;
         s1 >> kx; s2 >> ky;
 
-        if (blur.BlurImage(srcImg, desImg, kx, ky, 1) == 1) {
+        if (Blur::BlurImage(srcImg, desImg, kx, ky, Blur::MEDIAN_FLAG) == 1) {
             cerr << "Error!!! Failed to blur this image using median filtering" << endl;
             return 1;
         }
@@ -57,7 +58,7 @@ int main(int argc, const char** argv)
         int kx, ky;
         s1 >> kx; s2 >> ky;
 
-        if (blur.BlurImage(srcImg, desImg, kx, ky, 2) == 1) {
+        if (Blur::BlurImage(srcImg, desImg, kx, ky, Blur::GAUSSIAN_FLAG) == 1) {
             cerr << "Error!!! Failed to blur this image using Gaussian filtering" << endl;
             return 1;
         }
@@ -70,7 +71,7 @@ int main(int argc, const char** argv)
         // Read input image
         Mat srcImg = imread(argv[2], cv::IMREAD_GRAYSCALE);
 
-        if (edgeDetector.DetectEdge(srcImg, desImg, 0) == 1) {
+        if (EdgeDetector::DetectEdge(srcImg, desImg, EdgeDetector::SOBEL_FLAG) == 1) {
             cerr << "Error!!! Failed to detect edges of this image using Sobel Operator" << endl;
             return 1;
         }
@@ -83,7 +84,7 @@ int main(int argc, const char** argv)
         // Read input image
         Mat srcImg = imread(argv[2], cv::IMREAD_GRAYSCALE);
 
-        if (edgeDetector.DetectEdge(srcImg, desImg, 1) == 1) {
+        if (EdgeDetector::DetectEdge(srcImg, desImg, EdgeDetector::PREWITT_FLAG) == 1) {
             cerr << "Error!!! Failed to detect edges of this image using Prewitt Operator" << endl;
             return 1;
         }
@@ -96,7 +97,7 @@ int main(int argc, const char** argv)
         // Read input image
         Mat srcImg = imread(argv[2], cv::IMREAD_GRAYSCALE);
 
-        if (edgeDetector.DetectEdge(srcImg, desImg, 2) == 1) {
+        if (EdgeDetector::DetectEdge(srcImg, desImg, EdgeDetector::LAPLACE_FLAG) == 1) {
             cerr << "Error!!! Failed to detect edges of this image using Laplace Operator" << endl;
             return 1;
         }
@@ -109,7 +110,25 @@ int main(int argc, const char** argv)
         cerr << "Request does not exist: " << argv[1] << endl;
         return 1;
     }
+    */
 
+    Mat src = imread("test2.png", IMREAD_GRAYSCALE);
+    Mat edge;
+    Mat dst = src.clone();
+    //Blur::BlurImage(src, dst, 5, 5, Blur::AVERAGE_FLAG);
+    //imshow("a", dst);
+    //waitKey(0);
+    //EdgeDetector::DetectEdge(src, dst, EdgeDetector::SOBEL_FLAG);
+    Canny::DetectEdge(src, dst, 30, 200);
+    imshow("MyCanny", dst);
+    waitKey(0);
+    destroyAllWindows();
+
+    cv::blur(src, dst, cv::Size(5, 5));
+    cv::Canny(dst, dst, 30, 200);
+    imshow("OpencvCanny", dst);
+    waitKey(0);
+    destroyAllWindows();
 
     return 0;
 }
